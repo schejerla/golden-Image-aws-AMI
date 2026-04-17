@@ -34,12 +34,12 @@ build {
   sources = ["source.amazon-ebs.windows"]
 
   provisioner "powershell" {
-    scripts = [
-      "scripts/setup.ps1"
-    ]
-  }
+  scripts = [
+    "packer/scripts/setup.ps1"
+  ]
+}
 
-  provisioner "powershell" {
-    script = "scripts/sysprep.ps1"
-  }
+provisioner "powershell" {
+  script = "packer/scripts/sysprep.ps1"
+}
 }
