@@ -1,10 +1,10 @@
-# First Pipline
 name: Build Windows AMI
 
 on:
- push:
+  push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,18 +16,21 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Install Packer
         uses: hashicorp/setup-packer@v3
 
       - name: Init Packer
-        run: packer init packer/
+        run: packer init .
+        working-directory: packer
 
       - name: Validate Packer
-        run: packer validate packer/
+        run: packer validate .
+        working-directory: packer
 
       - name: Build AMI
-        run: packer build packer/
+        run: packer build .
+        working-directory: packer
