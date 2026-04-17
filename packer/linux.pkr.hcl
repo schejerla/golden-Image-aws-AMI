@@ -35,21 +35,21 @@ build {
 
   # Setup / base configuration
   provisioner "shell" {
-    script = "packer/scripts/setup.sh"
+    script = "packer/linux/scripts/setup.sh"
   }
 
   # Hardening
   provisioner "shell" {
-    script = "packer/scripts/hardening.sh"
+    script = "packer/linux/scripts/hardening.sh"
   }
 
   # Install tools
   provisioner "shell" {
-    script = "packer/scripts/install-tools.sh"
+    script = "packer/linux/scripts/install-tools.sh"
   }
 
   # Final cleanup (instead of sysprep)
   provisioner "shell" {
-    script = "packer/scripts/cleanup.sh"
+    script = "packer/linux/scripts/cleanup.sh"
   }
 }
