@@ -36,7 +36,7 @@ build {
   provisioner "powershell" {
   scripts = [
     "packer/scripts/setup.ps1",
-     "scripts/hardening.ps1"
+     "packer/scripts/hardening.ps1"
   ]
 }
 
