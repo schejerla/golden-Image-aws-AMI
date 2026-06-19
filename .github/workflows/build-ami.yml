@@ -2,14 +2,18 @@ name: Build Windows AMI
 
 on:
   push:
-    branches: [**]
+    branches:
+      - "**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
@@ -22,14 +26,17 @@ jobs:
       - name: Install Packer
         uses: hashicorp/setup-packer@v3
 
-      - name: Init Packer
+      - name: Verify Packer Version
+        run: packer version
+
+      - name: Initialize Packer Plugins
         run: packer init .
-        working-directory: packer
+        working-directory: ./packer
 
-      - name: Validate Packer
+      - name: Validate Packer Template
         run: packer validate .
-        working-directory: packer
+        working-directory: ./packer
 
-      - name: Build AMI
+      - name: Build Windows AMI
         run: packer build .
-        working-directory: packer
+        working-directory: ./packer
