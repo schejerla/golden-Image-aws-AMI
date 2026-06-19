@@ -2,8 +2,7 @@ name: Build Windows AMI
 
 on:
   push:
-    branches:
-      - main
+    branches: [**]
 
 jobs:
   build:
